@@ -26,7 +26,7 @@ jobs:
           sudo mv alertmanager-0.26.0.linux-amd64/amtool /usr/local/bin/amtool
 
       - name: Проверка YAML-файлов
-        run: yamllint .
+        run: yamllint .github docker-compose.yml prometheus alertmanager
 
       - name: Проверка конфигурации Prometheus
         run: promtool check config prometheus/prometheus.yml
