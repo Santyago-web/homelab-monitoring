@@ -1,0 +1,7 @@
+.env
+alertmanager/alertmanager.yml
+grafana/
+*.log
+*.tmp
+__pycache__/
+*.bak
