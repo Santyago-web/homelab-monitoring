@@ -54,21 +54,14 @@ homelab-monitoring/
 
 ## 📬 Уведомления в Telegram
 
-### Пример `.env`:
-
-```env
-TELEGRAM_BOT_TOKEN=123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-TELEGRAM_CHAT_ID=123456789
-```
-
 ### Пример секции в `alertmanager.yml`:
 
 ```yaml
 receivers:
   - name: 'telegram'
     telegram_configs:
-      - bot_token: '{{ env "TELEGRAM_BOT_TOKEN" }}'
-        chat_id: '{{ env "TELEGRAM_CHAT_ID" }}'
+      - bot_token: "TELEGRAM_BOT_TOKEN"
+        chat_id: TELEGRAM_CHAT_ID
 ```
 
 ---
