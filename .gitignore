@@ -1,5 +1,6 @@
 .env
-alertmanager/alertmanager.yml
+alertmanager/*
+!alertmanager/.keep
 grafana/
 *.log
 *.tmp
