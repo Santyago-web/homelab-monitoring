@@ -1,10 +1,10 @@
+---
 name: CI
-
 on:
   push:
-    branches: [ main ]
+    branches: ["main"]
   pull_request:
-    branches: [ main ]
+    branches: ["main"]
 
 jobs:
   check:
@@ -15,12 +15,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Установка promtool и yamllint
-        run: |
+        run:
           sudo apt-get update
           sudo apt-get install -y prometheus yamllint
 
       - name: Установка amtool (Alertmanager CLI)
-        run: |
+        run: >
           wget https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz
           tar -xzf alertmanager-0.26.0.linux-amd64.tar.gz
           sudo mv alertmanager-0.26.0.linux-amd64/amtool /usr/local/bin/amtool
@@ -35,7 +35,7 @@ jobs:
         run: promtool check rules prometheus/alert.rules.yml
 
       - name: Проверка конфигурации Alertmanager
-        run: |
+        run:
           if [ -f alertmanager/alertmanager.yml ]; then
             amtool check-config alertmanager/alertmanager.yml
           else
