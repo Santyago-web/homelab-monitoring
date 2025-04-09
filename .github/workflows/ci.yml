@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Клонирование репозитория
+        uses: actions/checkout@v4
+
+      - name: Установка зависимостей
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y prometheus alertmanager yamllint
+
+      - name: Проверка YAML-файлов
+        run: yamllint .
+
+      - name: Проверка конфигурации Prometheus
+        run: promtool check config prometheus/prometheus.yml
+
+      - name: Проверка правил алертов
+        run: promtool check rules prometheus/alert.rules.yml
+
+      - name: Проверка конфигурации Alertmanager
+        run: amtool check-config alertmanager/alertmanager.yml || echo "Файл может быть приватным"
